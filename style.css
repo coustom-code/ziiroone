@@ -4,8 +4,8 @@ body {
     
   }
 
-.tp-copyright-text > p {
-    color: red;
+.tp-copyright-text p {
+    color: red !important;
 }
 
   
