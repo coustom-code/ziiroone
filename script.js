@@ -16,3 +16,37 @@
 //         };
 //     };
 // })();
+function loadScript(url, callback) {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src = url;
+
+  script.onload = function() {
+      if (callback) callback();
+  };
+
+  script.onerror = function() {
+      console.error('The script ' + url + ' failed to load.');
+  };
+
+  document.head.appendChild(script);
+}
+
+function loadFirebaseLibraries() {
+  loadScript('https://www.gstatic.com/firebasejs/9.12.1/firebase-app.js', function() {
+      console.log('Firebase app loaded successfully.');
+      loadScript('https://www.gstatic.com/firebasejs/9.12.1/firebase-firestore.js', function() {
+          console.log('Firebase Firestore loaded successfully.');
+          loadCustomScript();  // Load custom script after Firebase libraries
+      });
+  });
+}
+
+function loadCustomScript() {
+  loadScript('https://z2mg4d-5000.csb.app/js/form-control.js', function() {
+      console.log('Custom script loaded successfully.');
+  });
+}
+
+// Start loading Firebase SDK libraries
+loadFirebaseLibraries();
